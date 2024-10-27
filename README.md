@@ -57,6 +57,3 @@ After the Docker environment is set up, the `sparking_flow` DAG will be availabl
 
 ### Note:
 You must add the spark cluster url to the spark connection in the configuration on Airflow UI
-
-### Full Course
-[![Sparking Flow](https://img.youtube.com/vi/o_pne3aLW2w/0.jpg)](https://www.youtube.com/watch?v=o_pne3aLW2w)
