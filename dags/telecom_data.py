@@ -12,10 +12,9 @@ dag = DAG(
     schedule_interval="@daily"
 )
 
-# Zadanie startowe
 start = PythonOperator(
     task_id="start",
-    python_callable=lambda: print("Pipeline started"),
+    python_callable=lambda: print("Start"),
     dag=dag
 )
 
