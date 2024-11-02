@@ -1,9 +1,12 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType
+import shutil
+import os
 
 spark = SparkSession.builder \
     .appName("DataProcessingJob") \
-    .config("spark.master", "local") \
+    .config("spark.local.dir", "/tmp/spark-temp") \
+    .config("mapreduce.fileoutputcommitter.algorithm.version", "2") \
     .getOrCreate()
 
 schema = StructType([
@@ -17,8 +20,14 @@ schema = StructType([
     StructField("internet", StringType(), True)
 ])
 
-input_path = "/opt/airflow/data1.csv"
-output_path = "/opt/airflow/bronze/sample_data"
+input_path = "/opt/data/data1.csv"
+output_path = "/opt/data/sample_data"
+
+if os.path.exists(output_path):
+    try:
+        shutil.rmtree(output_path)
+    except PermissionError as e:
+        print(f"Permission error: {e}")
 
 data = spark.read.csv(input_path, header=True, schema=schema)
 
