@@ -18,10 +18,17 @@ start = PythonOperator(
     dag=dag
 )
 
-process_data = SparkSubmitOperator(
-    task_id="process_data",
+bronze_layer = SparkSubmitOperator(
+    task_id="bronze_layer",
     conn_id="spark-conn",
     application="jobs/python/data_processing_job.py",
+    dag=dag
+)
+
+silver_layer = SparkSubmitOperator(
+    task_id="silver_layer",
+    conn_id="spark-conn",
+    application="jobs/python/data_processing_job_silver.py",
     dag=dag
 )
 
@@ -30,4 +37,4 @@ end = PythonOperator(
     python_callable=lambda: print("Completed successfully"),
     dag=dag
 )
-start >> process_data >> end
+start >> bronze_layer>> silver_layer >> end

@@ -4,7 +4,7 @@ import shutil
 import os
 
 spark = SparkSession.builder \
-    .appName("DataProcessingJob") \
+    .appName("Bronze Layer") \
     .config("spark.local.dir", "/tmp/spark-temp") \
     .config("mapreduce.fileoutputcommitter.algorithm.version", "2") \
     .getOrCreate()
@@ -21,7 +21,7 @@ schema = StructType([
 ])
 
 input_path = "/opt/data/data1.csv"
-output_path = "/opt/data/sample_data"
+output_path = "/opt/data/bronze/sample_data"
 
 if os.path.exists(output_path):
     try:
@@ -33,10 +33,16 @@ data = spark.read.csv(input_path, header=True, schema=schema)
 
 sample_data = data.limit(10000)
 
-sample_data.write \
+# sample_data.write \
+#     .mode("overwrite") \
+#     .option("header", "true") \
+#     .partitionBy("countrycode") \
+#     .csv(output_path)
+
+sample_data.repartition(2) \
+    .write \
     .mode("overwrite") \
     .option("header", "true") \
-    .partitionBy("countrycode") \
     .csv(output_path)
 
 spark.stop()
