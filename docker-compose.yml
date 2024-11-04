@@ -4,10 +4,10 @@ x-spark-common: &spark-common
   image: bitnami/spark:3.4.2
   volumes:
     - ./jobs:/opt/bitnami/spark/jobs
-    - bronze_volume:/opt/airflow/bronze
     - ./data:/opt/data
   networks:
     - code-with-yu
+  user: "root"
 
 x-airflow-common: &airflow-common
   build:
@@ -20,11 +20,11 @@ x-airflow-common: &airflow-common
     - ./dags:/opt/airflow/dags
     - ./logs:/opt/airflow/logs
     - ./data:/opt/data
-    - bronze_volume:/opt/airflow/bronze
   depends_on:
     - postgres
   networks:
     - code-with-yu
+  user: "root"
 
 services:
   spark-master:
@@ -36,7 +36,6 @@ services:
       - "7077:7077"
     volumes:
       - ./data1.csv:/opt/airflow/data1.csv
-      - bronze_volume:/opt/airflow/bronze
       - ./data:/opt/data
 
   spark-worker:
@@ -52,7 +51,6 @@ services:
       SPARK_MASTER_URL: spark://spark-master:7077
     volumes:
       - ./data1.csv:/opt/airflow/data1.csv
-      - bronze_volume:/opt/airflow/bronze
       - ./data:/opt/data
 
   postgres:

@@ -5,8 +5,6 @@ import os
 
 spark = SparkSession.builder \
     .appName("Bronze Layer") \
-    .config("spark.local.dir", "/tmp/spark-temp") \
-    .config("mapreduce.fileoutputcommitter.algorithm.version", "2") \
     .getOrCreate()
 
 schema = StructType([

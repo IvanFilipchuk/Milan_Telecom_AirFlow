@@ -2,12 +2,8 @@ from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType, DoubleType
 from pyspark.sql.functions import col, expr
 
-
-
 spark = SparkSession.builder \
     .appName("Silver Layer") \
-    .config("spark.local.dir", "/tmp/spark-temp") \
-    .config("mapreduce.fileoutputcommitter.algorithm.version", "2") \
     .getOrCreate()
 
 schema = StructType([
