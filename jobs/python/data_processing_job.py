@@ -1,7 +1,6 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType
-import shutil
-import os
+import sys
 
 spark = SparkSession.builder \
     .appName("Bronze Layer") \
@@ -18,14 +17,9 @@ schema = StructType([
     StructField("internet", StringType(), True)
 ])
 
-input_path = "/opt/data/data1.csv"
-output_path = "/opt/data/bronze/sample_data"
-
-if os.path.exists(output_path):
-    try:
-        shutil.rmtree(output_path)
-    except PermissionError as e:
-        print(f"Permission error: {e}")
+input_path = sys.argv[1]
+output_path = sys.argv[2]
+partition_number = int(sys.argv[3])
 
 data = spark.read.csv(input_path, header=True, schema=schema)
 
@@ -37,7 +31,7 @@ sample_data = data.limit(10000)
 #     .partitionBy("countrycode") \
 #     .csv(output_path)
 
-sample_data.repartition(2) \
+sample_data.repartition(partition_number) \
     .write \
     .mode("overwrite") \
     .option("header", "true") \

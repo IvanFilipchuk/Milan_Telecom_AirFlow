@@ -22,6 +22,7 @@ bronze_layer = SparkSubmitOperator(
     task_id="bronze_layer",
     conn_id="spark-conn",
     application="jobs/python/data_processing_job.py",
+    application_args=["/opt/data/data1.csv", "/opt/data/bronze/sample_data", "2"],
     dag=dag
 )
 
