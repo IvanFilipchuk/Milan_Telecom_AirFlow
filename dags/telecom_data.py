@@ -33,9 +33,16 @@ silver_layer = SparkSubmitOperator(
     dag=dag
 )
 
+golden_layer = SparkSubmitOperator(
+    task_id="golden_layer",
+    conn_id="spark-conn",
+    application="jobs/python/data_processing_job_gold.py",
+    dag=dag
+)
+
 end = PythonOperator(
     task_id="end",
     python_callable=lambda: print("Completed successfully"),
     dag=dag
 )
-start >> bronze_layer>> silver_layer >> end
+start >> bronze_layer>> silver_layer >> golden_layer >> end
