@@ -1,12 +1,14 @@
+import sys
+
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import sum, avg
 spark = SparkSession.builder \
     .appName("Gold Layer Aggregation") \
     .getOrCreate()
-input_path_internet = "/opt/data/silver/internet"
-input_path_sms_call = "/opt/data/silver/sms_call"
-output_path_gold_grid = "/opt/data/gold/aggregated_by_gridid"
-output_path_gold_country = "/opt/data/gold/aggregated_by_country"
+input_path_internet = sys.argv[1]+"/internet"
+input_path_sms_call = sys.argv[1]+"/sms_call"
+output_path_gold_grid = sys.argv[2]+"/aggregated_by_gridid"
+output_path_gold_country = sys.argv[2]+"/aggregated_by_country"
 internet_data = spark.read.csv(input_path_internet, header=True, inferSchema=True)
 sms_call_data = spark.read.csv(input_path_sms_call, header=True, inferSchema=True)
 

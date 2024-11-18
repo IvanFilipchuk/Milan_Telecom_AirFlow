@@ -1,3 +1,5 @@
+import sys
+
 from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType, DoubleType
 from pyspark.sql.functions import col, expr
@@ -17,10 +19,10 @@ schema = StructType([
     StructField("internet", StringType(), True)
 ])
 
-input_path = "/opt/data/bronze/sample_data"
-output_path_internet = "/opt/data/silver/internet"
-output_path_sms_call = "/opt/data/silver/sms_call"
-output_path_user_events = "/opt/data/silver/user_events"
+input_path = sys.argv[1]
+output_path_internet = sys.argv[2]+"/internet"
+output_path_sms_call = sys.argv[2]+"/sms_call"
+output_path_user_events = sys.argv[2]+"/user_events"
 
 data = spark.read.csv(input_path, header=True, schema=schema)
 

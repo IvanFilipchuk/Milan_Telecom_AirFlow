@@ -30,6 +30,7 @@ silver_layer = SparkSubmitOperator(
     task_id="silver_layer",
     conn_id="spark-conn",
     application="jobs/python/data_processing_job_silver.py",
+    application_args=["/opt/data/bronze/sample_data", "/opt/data/silver"],
     dag=dag
 )
 
@@ -37,6 +38,7 @@ golden_layer = SparkSubmitOperator(
     task_id="golden_layer",
     conn_id="spark-conn",
     application="jobs/python/data_processing_job_gold.py",
+    application_args=["/opt/data/silver", "/opt/data/gold"],
     dag=dag
 )
 
