@@ -2,4 +2,4 @@
 venv
 logs
 __pycache__
-data/data1.csv
+data
