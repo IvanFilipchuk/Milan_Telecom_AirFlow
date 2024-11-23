@@ -2,6 +2,8 @@
 
 This project demonstrates a data pipeline designed to process and analyze telecom data using Apache Airflow, Apache Spark, and Docker. The pipeline includes multiple layers of data transformation (bronze, silver, and gold) and supports scalable processing through Spark.
 
+The pipeline processes telecom data from the [**Telecom Dataset**](https://www.kaggle.com/datasets/freckled/telecom), which contains details about SMS, calls, internet usage, and associated metadata. This dataset is used to perform ingestion, normalization, and aggregation tasks, showcasing end-to-end data processing for analytical purposes.
+
 ---
 
 ## **Features**
@@ -40,7 +42,7 @@ This project demonstrates a data pipeline designed to process and analyze teleco
 
 The data pipeline workflow is managed using Apache Airflow. Below is the Airflow DAG graph visualizing the pipeline:
 
-![Airflow DAG Graph](![image](https://github.com/user-attachments/assets/ae1f0b0e-3249-4ed1-8368-e3ad9fd28bbb))
+![Airflow DAG Graph](images/dag_graph.png)
 
 1. **Start**: Initializes the pipeline.
 2. **Bronze Layer**:
@@ -57,6 +59,26 @@ The data pipeline workflow is managed using Apache Airflow. Below is the Airflow
 5. **End**: Marks the pipeline as completed.
 
 ---
-```bash
-docker-compose up -d --build
-```
+
+## **Setup and Installation**
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/IvanFilipchuk/Milan_Telecom_AirFlow.git
+   cd Milan_Telecom_AirFlow
+   ```
+2. **Download the dataset from Kaggle**  
+   [**Telecom Dataset**](https://www.kaggle.com/datasets/freckled/telecom)
+
+3. **Extract the dataset and move the file `data1.csv` to the `data` directory in the project**  
+   ```plaintext
+   Milan_Telecom_AirFlow/
+   ├── data/
+   │   └── data1.csv
+   ```
+4. **Build and set up the application using Docker Compose**
+   ```bash
+   docker-compose up --build
+   ```
+
+---
