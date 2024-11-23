@@ -1,9 +1,10 @@
-from pyspark.sql import SparkSession
-from pyspark.sql.types import StructType, StructField, StringType, IntegerType
 import sys
+from pyspark.sql import SparkSession
+from pyspark.sql.types import StructType, StructField, StringType, IntegerType, DoubleType
+from pyspark.sql.functions import col
 
 spark = SparkSession.builder \
-    .appName("Bronze Layer") \
+    .appName("Silver Layer - Internet Data") \
     .getOrCreate()
 
 schema = StructType([
@@ -23,15 +24,11 @@ partition_number = int(sys.argv[3])
 
 data = spark.read.csv(input_path, header=True, schema=schema)
 
-sample_data = data.limit(10000)
+internet_data = data.filter(col("internet").isNotNull() & (col("internet") != "0")) \
+    .withColumn("transfer", col("internet").cast(DoubleType())) \
+    .select("GridID", "TimeInterval", "countrycode", "transfer")
 
-# sample_data.write \
-#     .mode("overwrite") \
-#     .option("header", "true") \
-#     .partitionBy("countrycode") \
-#     .csv(output_path)
-
-sample_data.repartition(partition_number) \
+internet_data.repartition(partition_number) \
     .write \
     .mode("overwrite") \
     .option("header", "true") \
