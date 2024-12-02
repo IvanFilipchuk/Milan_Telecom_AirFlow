@@ -18,14 +18,15 @@ sns.barplot(
     data=internet_by_country,
     palette='Blues_d'
 )
+plt.yscale('log')  # Apply logarithmic scale
 plt.xlabel('Country Code', fontsize=12)
-plt.ylabel('Total Internet Transfer', fontsize=12)
-plt.title('Total Internet Transfer by Country', fontsize=16)
+plt.ylabel('Total Internet Transfer (Log Scale)', fontsize=12)
+plt.title('Total Internet Transfer by Country (Log Scale)', fontsize=16)
 plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
 
-# Total Internet Transfer by GridID
+# Total Internet Transfer by GridID with Log Scale
 plt.figure(figsize=(12, 6))
 sns.barplot(
     x='GridID',
@@ -33,14 +34,15 @@ sns.barplot(
     data=internet_by_gridid,
     palette='Oranges_d'
 )
+plt.yscale('log')  # Apply logarithmic scale
 plt.xlabel('Grid ID', fontsize=12)
-plt.ylabel('Total Internet Transfer', fontsize=12)
-plt.title('Total Internet Transfer by GridID', fontsize=16)
+plt.ylabel('Total Internet Transfer (Log Scale)', fontsize=12)
+plt.title('Total Internet Transfer by GridID (Log Scale)', fontsize=16)
 plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
 
-# SMS and Call Data by Country
+# SMS and Call Data by Country with Log Scale
 plt.figure(figsize=(12, 6))
 sns.barplot(
     x='countrycode',
@@ -57,15 +59,16 @@ sns.barplot(
     alpha=0.7,
     label='Total Call Time'
 )
+plt.yscale('log')  # Apply logarithmic scale
 plt.xlabel('Country Code', fontsize=12)
-plt.ylabel('Count / Time', fontsize=12)
-plt.title('SMS and Call Data by Country', fontsize=16)
+plt.ylabel('Count / Time (Log Scale)', fontsize=12)
+plt.title('SMS and Call Data by Country (Log Scale)', fontsize=16)
 plt.legend()
 plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
 
-# SMS and Call Data by GridID
+# SMS and Call Data by GridID with Log Scale
 plt.figure(figsize=(12, 6))
 sns.barplot(
     x='GridID',
@@ -82,9 +85,10 @@ sns.barplot(
     alpha=0.7,
     label='Total Call Time'
 )
+plt.yscale('log')  # Apply logarithmic scale
 plt.xlabel('Grid ID', fontsize=12)
-plt.ylabel('Count / Time', fontsize=12)
-plt.title('SMS and Call Data by GridID', fontsize=16)
+plt.ylabel('Count / Time (Log Scale)', fontsize=12)
+plt.title('SMS and Call Data by GridID (Log Scale)', fontsize=16)
 plt.legend()
 plt.xticks(rotation=45)
 plt.tight_layout()
