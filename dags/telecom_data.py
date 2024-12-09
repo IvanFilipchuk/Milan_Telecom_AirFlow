@@ -143,7 +143,17 @@ load_gridid_sms_call_to_db = SparkSubmitOperator(
     },
     dag=dag
 )
-
+sinusoidal_function_generation = SparkSubmitOperator(
+    task_id="sinusoidal_function_generation",
+    conn_id="spark-conn",
+    application="jobs/python/sinusoidal.py",
+    application_args=["country_sms_call","country_internet","gridid_sms_call","gridid_internet","/opt/data/data-generated.csv"],
+    conf={
+        "spark.jars": "/opt/spark/jars/postgresql-42.7.4.jar",
+        "spark.driver.extraClassPath": "/opt/spark/jars/postgresql-42.7.4.jar",
+        "spark.executor.extraClassPath": "/opt/spark/jars/postgresql-42.7.4.jar",
+    },
+    dag=dag)
 end = PythonOperator(
     task_id="end",
     python_callable=lambda: print("Pipeline completed successfully"),
@@ -174,7 +184,9 @@ golden_aggregation_by_country >> load_country_internet_to_db
 golden_aggregation_by_country >> load_country_sms_call_to_db
 
 
-load_gridid_internet_to_db >> end
-load_gridid_sms_call_to_db >> end
-load_country_internet_to_db >> end
-load_country_sms_call_to_db >> end
+load_gridid_internet_to_db >> sinusoidal_function_generation
+load_gridid_sms_call_to_db >> sinusoidal_function_generation
+load_country_internet_to_db >> sinusoidal_function_generation
+load_country_sms_call_to_db >> sinusoidal_function_generation
+
+sinusoidal_function_generation >> end
