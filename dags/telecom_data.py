@@ -65,6 +65,85 @@ golden_aggregation_by_country = SparkSubmitOperator(
     application_args=["/opt/data/silver", "/opt/data/gold/aggregated_by_country", "1"],
     dag=dag
 )
+
+# test_postgresql_connection = SparkSubmitOperator(
+#     task_id="test_postgresql_connection",
+#     conn_id="spark-conn",
+#     application="jobs/python/test_postgresql_connection.py",
+#     conf={
+#         "spark.jars": "/opt/spark/jars/postgresql-42.7.4.jar",
+#         "spark.driver.extraClassPath": "/opt/spark/jars/postgresql-42.7.4.jar",
+#         "spark.executor.extraClassPath": "/opt/spark/jars/postgresql-42.7.4.jar",
+#     },
+#     dag=dag
+# )
+
+load_country_internet_to_db = SparkSubmitOperator(
+    task_id="load_country_internet_to_db",
+    conn_id="spark-conn",
+    application="jobs/python/gold_layer/load_to_db/country_internet.py",
+    application_args=[
+        "/opt/data/gold/aggregated_by_country/internet",
+        "country_internet"
+    ],
+    conf={
+        "spark.jars": "/opt/spark/jars/postgresql-42.7.4.jar",
+        "spark.driver.extraClassPath": "/opt/spark/jars/postgresql-42.7.4.jar",
+        "spark.executor.extraClassPath": "/opt/spark/jars/postgresql-42.7.4.jar",
+    },
+    dag=dag
+)
+
+
+load_country_sms_call_to_db = SparkSubmitOperator(
+    task_id="load_country_sms_call_to_db",
+    conn_id="spark-conn",
+    application="jobs/python/gold_layer/load_to_db/country_sms_call.py",
+    application_args=[
+        "/opt/data/gold/aggregated_by_country/sms_call",
+        "country_sms_call"
+    ],
+    conf={
+        "spark.jars": "/opt/spark/jars/postgresql-42.7.4.jar",
+        "spark.driver.extraClassPath": "/opt/spark/jars/postgresql-42.7.4.jar",
+        "spark.executor.extraClassPath": "/opt/spark/jars/postgresql-42.7.4.jar",
+    },
+    dag=dag
+)
+
+
+load_gridid_internet_to_db = SparkSubmitOperator(
+    task_id="load_gridid_internet_to_db",
+    conn_id="spark-conn",
+    application="jobs/python/gold_layer/load_to_db/gridid_internet.py",
+    application_args=[
+        "/opt/data/gold/aggregated_by_gridid/internet",
+        "gridid_internet"
+    ],
+    conf={
+        "spark.jars": "/opt/spark/jars/postgresql-42.7.4.jar",
+        "spark.driver.extraClassPath": "/opt/spark/jars/postgresql-42.7.4.jar",
+        "spark.executor.extraClassPath": "/opt/spark/jars/postgresql-42.7.4.jar",
+    },
+    dag=dag
+)
+
+load_gridid_sms_call_to_db = SparkSubmitOperator(
+    task_id="load_gridid_sms_call_to_db",
+    conn_id="spark-conn",
+    application="jobs/python/gold_layer/load_to_db/gridid_sms_call.py",
+    application_args=[
+        "/opt/data/gold/aggregated_by_gridid/sms_call",
+        "gridid_sms_call"
+    ],
+    conf={
+        "spark.jars": "/opt/spark/jars/postgresql-42.7.4.jar",
+        "spark.driver.extraClassPath": "/opt/spark/jars/postgresql-42.7.4.jar",
+        "spark.executor.extraClassPath": "/opt/spark/jars/postgresql-42.7.4.jar",
+    },
+    dag=dag
+)
+
 end = PythonOperator(
     task_id="end",
     python_callable=lambda: print("Pipeline completed successfully"),
@@ -88,5 +167,14 @@ silver_internet >> golden_aggregation_by_country
 silver_sms_call >> golden_aggregation_by_country
 silver_user_events >> golden_aggregation_by_country
 
-golden_aggregation_by_gridid >> end
-golden_aggregation_by_country >> end
+golden_aggregation_by_gridid >> load_gridid_internet_to_db
+golden_aggregation_by_gridid >> load_gridid_sms_call_to_db
+
+golden_aggregation_by_country >> load_country_internet_to_db
+golden_aggregation_by_country >> load_country_sms_call_to_db
+
+
+load_gridid_internet_to_db >> end
+load_gridid_sms_call_to_db >> end
+load_country_internet_to_db >> end
+load_country_sms_call_to_db >> end
