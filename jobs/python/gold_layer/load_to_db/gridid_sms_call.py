@@ -11,7 +11,7 @@ spark = SparkSession.builder \
 csv_path = sys.argv[1]
 table_name = sys.argv[2]
 
-jdbc_url = "jdbc:postgresql://sparkingflow-postgres-1:5432/airflow"
+jdbc_url = "jdbc:postgresql://milan_telecom_airflow-postgres-1:5432/airflow"
 properties = {
     "user": "airflow",
     "password": "airflow",

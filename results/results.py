@@ -9,8 +9,6 @@ internet_by_gridid = pd.read_csv('internet_by_gridid.csv')
 sms_call_by_country = pd.read_csv('sms_call_by_country.csv')
 sms_call_by_gridid = pd.read_csv('sms_call_by_gridid.csv')
 
-
-# Total Internet Transfer by Country
 plt.figure(figsize=(12, 6))
 sns.barplot(
     x='countrycode',
@@ -18,7 +16,7 @@ sns.barplot(
     data=internet_by_country,
     palette='Blues_d'
 )
-plt.yscale('log')  # Apply logarithmic scale
+plt.yscale('log')
 plt.xlabel('Country Code', fontsize=12)
 plt.ylabel('Total Internet Transfer (Log Scale)', fontsize=12)
 plt.title('Total Internet Transfer by Country (Log Scale)', fontsize=16)
@@ -26,7 +24,6 @@ plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
 
-# Total Internet Transfer by GridID with Log Scale
 plt.figure(figsize=(12, 6))
 sns.barplot(
     x='GridID',
@@ -34,7 +31,7 @@ sns.barplot(
     data=internet_by_gridid,
     palette='Oranges_d'
 )
-plt.yscale('log')  # Apply logarithmic scale
+plt.yscale('log')
 plt.xlabel('Grid ID', fontsize=12)
 plt.ylabel('Total Internet Transfer (Log Scale)', fontsize=12)
 plt.title('Total Internet Transfer by GridID (Log Scale)', fontsize=16)
@@ -42,7 +39,6 @@ plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
 
-# SMS and Call Data by Country with Log Scale
 plt.figure(figsize=(12, 6))
 sns.barplot(
     x='countrycode',
@@ -59,7 +55,7 @@ sns.barplot(
     alpha=0.7,
     label='Total Call Time'
 )
-plt.yscale('log')  # Apply logarithmic scale
+plt.yscale('log')
 plt.xlabel('Country Code', fontsize=12)
 plt.ylabel('Count / Time (Log Scale)', fontsize=12)
 plt.title('SMS and Call Data by Country (Log Scale)', fontsize=16)
@@ -68,7 +64,6 @@ plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
 
-# SMS and Call Data by GridID with Log Scale
 plt.figure(figsize=(12, 6))
 sns.barplot(
     x='GridID',
@@ -85,7 +80,7 @@ sns.barplot(
     alpha=0.7,
     label='Total Call Time'
 )
-plt.yscale('log')  # Apply logarithmic scale
+plt.yscale('log')
 plt.xlabel('Grid ID', fontsize=12)
 plt.ylabel('Count / Time (Log Scale)', fontsize=12)
 plt.title('SMS and Call Data by GridID (Log Scale)', fontsize=16)
