@@ -1,0 +1,68 @@
+slice_name: Total vs. Average Internet Transfer by GridID
+description: null
+certified_by: null
+certification_details: null
+viz_type: heatmap_v2
+params:
+  datasource: 29__table
+  viz_type: heatmap_v2
+  slice_id: 122
+  x_axis: GridID
+  groupby: total_internet_transfer
+  metric:
+    aggregate: AVG
+    column:
+      advanced_data_type: null
+      certification_details: null
+      certified_by: null
+      column_name: average_internet_transfer
+      description: null
+      expression: null
+      filterable: true
+      groupby: true
+      id: 782
+      is_certified: false
+      is_dttm: false
+      python_date_format: null
+      type: DOUBLE PRECISION
+      type_generic: 0
+      verbose_name: null
+      warning_markdown: null
+    datasourceWarning: false
+    expressionType: SIMPLE
+    hasCustomLabel: false
+    label: AVG(average_internet_transfer)
+    optionName: metric_e71j1vggc66_0294bratasy6
+    sqlExpression: null
+  adhoc_filters: []
+  row_limit: 10000
+  sort_x_axis: alpha_asc
+  sort_y_axis: value_asc
+  normalize_across: heatmap
+  legend_type: continuous
+  linear_color_scheme: schemeOrRd
+  xscale_interval: -1
+  yscale_interval: -1
+  left_margin: auto
+  bottom_margin: 50
+  value_bounds:
+  - null
+  - null
+  y_axis_format: SMART_NUMBER
+  x_axis_time_format: smart_date
+  currency_format:
+    symbolPosition: suffix
+  show_legend: true
+  show_percentage: true
+  show_values: true
+  normalized: true
+  extra_form_data: {}
+  dashboards:
+  - 12
+query_context: '{"datasource":{"id":29,"type":"table"},"force":false,"queries":[{"filters":[],"extras":{"having":"","where":""},"applied_time_extras":{},"columns":[{"columnType":"BASE_AXIS","sqlExpression":"GridID","label":"GridID","expressionType":"SQL"},"total_internet_transfer"],"metrics":[{"aggregate":"AVG","column":{"advanced_data_type":null,"certification_details":null,"certified_by":null,"column_name":"average_internet_transfer","description":null,"expression":null,"filterable":true,"groupby":true,"id":782,"is_certified":false,"is_dttm":false,"python_date_format":null,"type":"DOUBLE
+  PRECISION","type_generic":0,"verbose_name":null,"warning_markdown":null},"datasourceWarning":false,"expressionType":"SIMPLE","hasCustomLabel":false,"label":"AVG(average_internet_transfer)","optionName":"metric_e71j1vggc66_0294bratasy6","sqlExpression":null}],"orderby":[["GridID",true],["AVG(average_internet_transfer)",true]],"annotation_layers":[],"row_limit":10000,"series_limit":0,"order_desc":true,"url_params":{},"custom_params":{},"custom_form_data":{},"post_processing":[{"operation":"rank","options":{"metric":"AVG(average_internet_transfer)"}}]}],"form_data":{"datasource":"29__table","viz_type":"heatmap_v2","slice_id":122,"x_axis":"GridID","groupby":"total_internet_transfer","metric":{"aggregate":"AVG","column":{"advanced_data_type":null,"certification_details":null,"certified_by":null,"column_name":"average_internet_transfer","description":null,"expression":null,"filterable":true,"groupby":true,"id":782,"is_certified":false,"is_dttm":false,"python_date_format":null,"type":"DOUBLE
+  PRECISION","type_generic":0,"verbose_name":null,"warning_markdown":null},"datasourceWarning":false,"expressionType":"SIMPLE","hasCustomLabel":false,"label":"AVG(average_internet_transfer)","optionName":"metric_e71j1vggc66_0294bratasy6","sqlExpression":null},"adhoc_filters":[],"row_limit":10000,"sort_x_axis":"alpha_asc","sort_y_axis":"value_asc","normalize_across":"heatmap","legend_type":"continuous","linear_color_scheme":"schemeOrRd","xscale_interval":-1,"yscale_interval":-1,"left_margin":"auto","bottom_margin":50,"value_bounds":[null,null],"y_axis_format":"SMART_NUMBER","x_axis_time_format":"smart_date","currency_format":{"symbolPosition":"suffix"},"show_legend":true,"show_percentage":true,"show_values":true,"normalized":true,"extra_form_data":{},"dashboards":[12],"force":false,"result_format":"json","result_type":"full"},"result_format":"json","result_type":"full"}'
+cache_timeout: null
+uuid: c154f99a-cdb5-4f9a-ba3c-948f2d8d9d38
+version: 1.0.0
+dataset_uuid: e47b2396-0c94-4809-9384-0c02dafa8743
