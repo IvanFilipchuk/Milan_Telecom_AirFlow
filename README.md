@@ -60,6 +60,24 @@ The data pipeline workflow is managed using Apache Airflow. Below is the Airflow
 
 ---
 
+## **Modifications and Enhancements**
+
+1. **Sinusoidal Function Generation**
+
+A new feature was added to the pipeline: sinusoidal function generation. This function processes the aggregated data and computes a synthetic feature based on sinusoidal transformations. The purpose of this enhancement was to provide an additional analytical perspective and test the flexibility of the pipeline in handling non-linear transformations.
+
+![Airflow DAG 2 Graph](images/dag_graph_1.png)
+
+2. **Visualization Dashboard in Apache Superset**
+
+![Dashboard](images/dashboard2.png)
+To improve data analysis and presentation, a comprehensive dashboard was created in Apache Superset. The dashboard includes:
+
+- **Summary of SMS and Call Activity by GridID**: A table presenting total and average values for SMS and call activities across different geographical areas.
+- **Radar Chart**: Comparison of telecom activity (SMS, calls, and internet usage) across countries.
+- **Scatter Plot**: Relationship between total and average internet transfer by country.
+- **Bar Chart**: Total internet transfer by country.
+
 ## **Setup and Installation**
 
 1. **Clone the Repository**
