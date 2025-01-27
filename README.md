@@ -11,6 +11,8 @@ The pipeline processes telecom data from the [**Telecom Dataset**](https://www.k
 - **Bronze Layer**: Raw data ingestion from CSV files.
 - **Silver Layer**: Data cleaning and normalization for specific use cases (internet, SMS & calls, user events).
 - **Gold Layer**: Aggregated analytics based on `GridID` and `CountryCode`.
+- **Custom Analytics**: Generation of sinusoidal functions for advanced insights.
+- **Interactive Visualizations**: Dashboard created in Apache Superset for data exploration and analysis.
 - **Containerized Execution**: Fully containerized using Docker Compose.
 - **Workflow Management**: Apache Airflow DAG for task orchestration.
 - **Scalable Processing**: Apache Spark for distributed data processing.
@@ -70,13 +72,30 @@ A new feature was added to the pipeline: sinusoidal function generation. This fu
 
 2. **Visualization Dashboard in Apache Superset**
 
-![Dashboard](images/dashboard2.png)
+![Dashboard](images/dashboard1.png)
 To improve data analysis and presentation, a comprehensive dashboard was created in Apache Superset. The dashboard includes:
 
 - **Summary of SMS and Call Activity by GridID**: A table presenting total and average values for SMS and call activities across different geographical areas.
-- **Radar Chart**: Comparison of telecom activity (SMS, calls, and internet usage) across countries.
+
+  ![Summary of SMS and Call Activity by GridID](images/ch1.png)
+- **Radar Chart**: Comparison of telecom activity (SMS and calls usage) across countries.
+
+  ![Radar Chart](images/ch3.png)
 - **Scatter Plot**: Relationship between total and average internet transfer by country.
+
+  ![Scatter Plot](images/ch4.png)
 - **Bar Chart**: Total internet transfer by country.
+
+  ![Bar Chart](images/ch2.png)
+
+These visualizations enable interactive exploration of telecom data and help identify patterns and insights at a glance.
+
+---
+
+## **Conclusion**
+This project demonstrates the power of modern data engineering tools like Apache Airflow, Apache Spark, and Docker in processing and analyzing large datasets. The inclusion of advanced analytics (e.g., sinusoidal function) and visualizations (e.g., Apache Superset dashboard) provides actionable insights into telecom data. This pipeline serves as a scalable and extensible solution for processing telecom datasets and generating business-critical insights.
+
+---
 
 ## **Setup and Installation**
 
